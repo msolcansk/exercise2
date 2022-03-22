@@ -82,9 +82,54 @@ or
  --> Saving diff to scan_diff_20220320-134736.csv
  --> Saving current scan as previous scan
 ```
+<br/>
+## How to run inside container:
 
-## How to build:
-Docker needs to be installed
+Docker needs to be installed.
+<br/>
+
+
+### Build container:
+
+- in project's root with docker
+```
+docker build --tag msolcansk/network-scanner:latest .
+```
+
+or
 
 - Use visual studio code:
-Build and run config is in .vscode dir
+
+Build and run config is in .vscode dir.
+
+You will have to change "args" in tasks.json to appropriate target ip/network for your docker network setup 
+
+
+<br/>
+
+### Run container:
+Run scan against target ip/network. You need to provide volume to store previous scan and scan diffs.
+
+
+```
+docker run --mount source=scanner_vol,target=/app/output msolcansk/network-scanner:latest <ip/network target>
+```
+
+Run scan against apache container in default Docker bridged network:
+```
+docker run --rm --mount source=scanner_vol,target=/app/output msolcansk/network-scanner:latest 172.17.0.2
+```
+
+Example test with running on docker host network (You do not have to have another container running in bridge network/other network) DO NOT RUN IN PROD!!!:
+
+```
+docker run --rm --network host msolcansk/network-scanner:latest 127.0.0.1 
+```
+
+<br/>
+
+
+### Run on K8S:
+```
+kubectl create -f scanner.yaml
+```
