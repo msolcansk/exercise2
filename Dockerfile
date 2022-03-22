@@ -13,8 +13,8 @@ RUN apt-get update && \
     apt-get install -y nmap && \
     python -m pip install -r requirements.txt
 
+COPY /app /app
 WORKDIR /app
-COPY . /app
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
