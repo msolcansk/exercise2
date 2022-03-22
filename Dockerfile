@@ -11,7 +11,8 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 RUN apt-get update && \
     apt-get install -y nmap && \
-    python -m pip install -r requirements.txt
+    python -m pip install -r requirements.txt && \
+    mkdir -p /app/output
 
 COPY /app /app
 WORKDIR /app

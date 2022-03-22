@@ -22,9 +22,10 @@ def main():
 
     current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
-    output_filename_previous = 'scan_previous.csv'
-    output_filename_current = 'scan_current.csv'
-    output_filename_diff = f'scan_diff_{current_time}.csv'
+    output_dir = "./output/"
+    output_filename_previous = f'{output_dir}scan_previous.csv'
+    output_filename_current = f'{output_dir}scan_current.csv'
+    output_filename_diff = f'{output_dir}scan_diff_{current_time}.csv'
 
     parser = argparse.ArgumentParser()
     parser.add_argument('target', help='Provide ip or network subnet to be scanned')
