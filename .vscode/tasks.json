@@ -19,7 +19,7 @@
                 "docker-build"
             ],
             "python": {
-                "args": ["172.17.0.2"],
+                "args": ["172.17.0.0/24"],
                 "file": "network_scanner.py"
             }
         }
