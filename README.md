@@ -124,7 +124,7 @@ docker run --rm --mount source=scanner_vol,target=/app/output msolcansk/network-
 Example test with running on docker host network (You do not have to have another container running in bridge network/other network) DO NOT RUN IN PROD!!!:
 
 ```
-docker run --rm --network host msolcansk/network-scanner:latest 127.0.0.1 
+docker run --rm --mount source=scanner_vol,target=/app/output --network host msolcansk/network-scanner:latest 127.0.0.1 
 ```
 
 <br/>
