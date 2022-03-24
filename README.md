@@ -83,6 +83,7 @@ or
  --> Saving current scan as previous scan
 ```
 <br/>
+
 ## How to run inside container:
 
 Docker needs to be installed.
@@ -129,7 +130,7 @@ docker run --rm --network host msolcansk/network-scanner:latest 127.0.0.1
 <br/>
 
 
-### Run on K8S:
+### Run on K8S(minikube):
 ```
 kubectl create -f scanner.yaml
 ```
