@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scanner-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /data/pv0001/
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: scanner-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scanner2
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            name: scanner_cronjob
+        spec:
+          volumes:
+            - name: scanner-output-dir
+              persistentVolumeClaim:
+                claimName: scanner-pvc
+          containers:
+          - name: scanner
+            image: msolcansk/network-scanner:0.1
+            imagePullPolicy: IfNotPresent
+            args:
+            - 172.17.0.0/24
+            volumeMounts:
+              - mountPath: "/app/output"
+                name: scanner-output-dir
+          restartPolicy: OnFailure
