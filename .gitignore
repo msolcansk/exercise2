@@ -2,3 +2,4 @@ venv/
 scrape/
 *.xml
 *.csv
+output/

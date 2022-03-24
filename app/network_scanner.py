@@ -31,7 +31,11 @@ def main():
     parser.add_argument('target', help='Provide ip or network subnet to be scanned')
     args = parser.parse_args()
     
-
+    #Create output dir if does not exist
+    isExist = os.path.exists(output_dir)
+    if not isExist:
+        os.makedirs(output_dir)
+    
     target = args.target
     ps = nmap.PortScanner()
     ps.scan(hosts=target, arguments='')
