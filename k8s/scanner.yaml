@@ -28,7 +28,7 @@ kind: CronJob
 metadata:
   name: scanner2
 spec:
-  schedule: "*/2 * * * *"
+  schedule: "0 5 * * *"
   jobTemplate:
     spec:
       template:
